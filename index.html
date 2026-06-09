@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOAL — Client Guides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================================
+     GOAL Design System — tokens (from GOAL Platform Style Guide v1.0)
+     ========================================================================== */
+  :root{
+    /* Brand / Primary */
+    --color-brand-primary:#057BE5; --color-brand-primary-hover:#0C6EC5;
+    --color-brand-secondary:#308ED6; --color-brand-accent:#3BEECA;
+    /* CTA */
+    --color-cta-magenta:#E83A89; --color-cta-magenta-hover:#BE2169;
+    /* Dark surfaces */
+    --color-surface-navy:#00172D; --color-surface-navy-deep:#001020;
+    /* Text */
+    --color-text-ink:#0F1B2D; --color-text-body:#2B3442; --color-text-muted:#6A7482;
+    /* Surfaces / lines */
+    --color-surface-white:#FFFFFF; --color-surface-gray-bg:#EFF2F7;
+    --color-border-divider:#F1F1F1; --color-border-input:#D6DCE5;
+    /* Semantic */
+    --color-warning:#F0A93B;
+    /* Type */
+    --font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+    --fs-display:50px; --fs-h3:26px; --fs-body-lg:18px; --fs-body:16px;
+    --fs-caption:13px; --fs-button:16px; --fs-eyebrow:14px;
+    --tracking-tight:-0.01em; --tracking-eyebrow:0.06em;
+    /* Radii */
+    --radius-pill:28px; --radius-card-product:12px; --radius-card-marketing:18px;
+    /* Spacing (4px base) */
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
+    --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
+    /* Elevation */
+    --elev-1:0 2px 6px rgba(0,23,45,0.06); --elev-2:0 4px 14px rgba(0,23,45,0.08);
+    /* Layout */
+    --container-max:1200px; --header-height-desktop:72px;
+  }
+  @media (max-width:767px){ :root{ --fs-display:32px; } }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--color-surface-gray-bg);font-family:var(--font-sans);
+    color:var(--color-text-body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,p{margin:0;}
+  #root{min-height:100vh;}
+
+  /* ---------- Shell ---------- */
+  .hub{max-width:var(--container-max);margin:0 auto;padding:0 var(--space-7) var(--space-9);}
+  @media(max-width:760px){ .hub{padding:0 var(--space-5) var(--space-8);} }
+
+  .masthead{display:flex;align-items:center;justify-content:space-between;
+    height:var(--header-height-desktop);}
+  .masthead .brand{display:flex;align-items:center;gap:var(--space-3);}
+  .masthead .brand img{height:26px;display:block;}
+  .masthead .meta{font-size:var(--fs-caption);font-weight:600;letter-spacing:var(--tracking-eyebrow);
+    text-transform:uppercase;color:var(--color-text-muted);white-space:nowrap;}
+
+  /* ---------- Hero (navy) ---------- */
+  .hero{position:relative;overflow:hidden;border-radius:var(--radius-card-marketing);
+    padding:var(--space-8) var(--space-8) calc(var(--space-8) + 4px);margin-top:var(--space-2);
+    background:var(--color-surface-navy);}
+  .hero .eyebrow{margin-bottom:var(--space-4);font-size:var(--fs-eyebrow);font-weight:600;
+    letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--color-brand-secondary);}
+  .hero h1{font-size:var(--fs-display);max-width:18ch;font-weight:900;line-height:1.08;
+    letter-spacing:var(--tracking-tight);color:#fff;}
+  .hero .sub{margin-top:var(--space-4);font-size:var(--fs-body-lg);max-width:62ch;color:#BCD0E2;}
+  .hero .watermark{position:absolute;right:-40px;top:50%;transform:translateY(-50%);
+    width:340px;opacity:.06;pointer-events:none;}
+
+  .mint-ul{background-image:linear-gradient(var(--color-brand-accent),var(--color-brand-accent));
+    background-repeat:no-repeat;background-position:0 92%;background-size:100% .14em;
+    padding:0 .06em .02em;}
+
+  /* ---------- Section label ---------- */
+  .seclabel{display:flex;align-items:baseline;gap:var(--space-3);
+    margin:var(--space-8) 0 var(--space-5);}
+  .seclabel h2{font-size:var(--fs-h3);font-weight:800;color:var(--color-text-ink);
+    letter-spacing:var(--tracking-tight);}
+  .seclabel .count{font-size:var(--fs-caption);font-weight:700;letter-spacing:.04em;
+    color:var(--color-text-muted);background:#fff;border:1px solid var(--color-border-input);
+    padding:3px 11px;border-radius:var(--radius-pill);white-space:nowrap;}
+
+  /* ---------- Grid ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5);}
+  @media(max-width:980px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:600px){ .grid{grid-template-columns:1fr;} }
+
+  /* ---------- Card ---------- */
+  .card{position:relative;display:flex;flex-direction:column;gap:var(--space-3);
+    background:var(--color-surface-white);border:1px solid var(--color-border-divider);
+    border-radius:var(--radius-card-product);padding:var(--space-5);
+    box-shadow:var(--elev-1);text-decoration:none;color:inherit;
+    transition:transform .18s cubic-bezier(.2,.7,.2,1), box-shadow .18s, border-color .18s;}
+  a.card:hover{transform:translateY(-4px);box-shadow:var(--elev-2);border-color:#CFE0F5;}
+  a.card:hover .open{gap:10px;color:var(--color-brand-primary-hover);}
+  .card.soon{cursor:default;opacity:.78;}
+  .card.soon .mono{background:#5A6878;}
+
+  .card .toprow{display:flex;align-items:center;gap:var(--space-3);}
+  .mono{flex-shrink:0;width:42px;height:42px;border-radius:11px;
+    background:var(--color-surface-navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:14px;letter-spacing:.02em;}
+  .crmname{font-size:var(--fs-caption);font-weight:700;color:var(--color-text-ink);letter-spacing:.01em;}
+  .crmname small{display:block;font-weight:600;color:var(--color-text-muted);
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-top:2px;white-space:nowrap;}
+
+  .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);}
+  .tag.export{background:#E3F0FD;color:var(--color-brand-primary-hover);}
+  .tag.quote{background:#E2F1FB;color:#1F6FA8;}
+  .tag.bind{background:#D8F5EA;color:#0C8C72;}
+
+  .card h3{font-size:18px;font-weight:800;line-height:1.3;color:var(--color-text-ink);
+    letter-spacing:var(--tracking-tight);}
+  .card p{font-size:var(--fs-caption);color:var(--color-text-muted);line-height:1.5;}
+
+  .card .spacer{flex:1;}
+  .card .open{display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-2);
+    font-size:var(--fs-caption);font-weight:700;color:var(--color-brand-primary);
+    white-space:nowrap;transition:gap .18s,color .18s;}
+  .card .open svg{width:15px;height:15px;}
+  .card .soonpill{display:inline-flex;align-items:center;gap:7px;margin-top:var(--space-2);
+    font-size:var(--fs-caption);font-weight:700;color:var(--color-text-muted);white-space:nowrap;}
+  .card .soonpill .dot{width:7px;height:7px;border-radius:50%;background:var(--color-warning);}
+
+  /* ---------- Request block ---------- */
+  .request{margin-top:var(--space-7);display:flex;align-items:center;gap:var(--space-6);
+    background:var(--color-surface-navy);border-radius:var(--radius-card-marketing);
+    padding:var(--space-6) var(--space-7);position:relative;overflow:hidden;}
+  .request .ricon{flex-shrink:0;width:54px;height:54px;border-radius:14px;
+    background:rgba(45,144,238,.16);display:flex;align-items:center;justify-content:center;}
+  .request .ricon svg{width:26px;height:26px;stroke:#7CC0FF;fill:none;stroke-width:1.7;}
+  .request .rtext{flex:1;}
+  .request .rtext h3{font-size:var(--fs-h3);color:#fff;font-weight:800;letter-spacing:var(--tracking-tight);}
+  .request .rtext p{font-size:var(--fs-body);color:#BCD0E2;margin-top:6px;max-width:58ch;}
+  .request .rtext p b{color:#fff;font-weight:600;}
+  .btn{flex-shrink:0;display:inline-flex;align-items:center;gap:9px;
+    background:var(--color-cta-magenta);color:#fff;font-weight:700;font-size:var(--fs-button);
+    padding:14px 26px;border-radius:var(--radius-pill);text-decoration:none;
+    transition:background .15s,transform .15s;white-space:nowrap;}
+  .btn:hover{background:var(--color-cta-magenta-hover);transform:translateY(-1px);}
+  .btn svg{width:17px;height:17px;}
+  @media(max-width:760px){ .request{flex-direction:column;align-items:flex-start;gap:var(--space-4);} }
+
+  /* ---------- Footer ---------- */
+  .foot{margin-top:var(--space-8);padding-top:var(--space-6);
+    border-top:1px solid var(--color-border-input);
+    display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);}
+  .foot img{height:24px;opacity:.85;}
+  .foot .tag2{font-size:var(--fs-caption);color:var(--color-text-muted);}
+  @media(max-width:600px){ .foot{flex-direction:column;align-items:flex-start;} }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hub" data-hero="navy">
+
+    <header class="masthead">
+      <div class="brand"><img src="assets/goal-wordmark-black.png" alt="GOAL"></div>
+      <div class="meta">Client Resources</div>
+    </header>
+
+    <section class="hero">
+      <img class="watermark" src="assets/goal-mark.png" alt="">
+      <div class="eyebrow">Client Resources</div>
+      <h1>Guides for every <span class="mint-ul">CRM you use</span>.</h1>
+      <p class="sub">Step-by-step walkthroughs for exporting your dispositions and sending
+        quote &amp; sale data back to GOAL — pick your CRM and task to get started.</p>
+    </section>
+
+    <div class="seclabel">
+      <h2>All guides</h2>
+      <span class="count">9 guides</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- ===== Lead Manager ===== -->
+      <a class="card" href="GOAL%20%E2%80%94%20Lead%20Manager%20Export%20Guide%20(Client).html">
+        <div class="toprow">
+          <div class="mono">LM</div>
+          <div class="crmname">Lead Manager<small>CRM Guide</small></div>
+        </div>
+        <span class="tag export">Export</span>
+        <h3>Exporting your disposition data</h3>
+        <p>Pull your quote &amp; sale results from Lead Manager and send them over in four quick steps.</p>
+        <div class="spacer"></div>
+        <span class="open">Open guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <div class="card soon">
+        <div class="toprow">
+          <div class="mono">LM</div>
+          <div class="crmname">Lead Manager<small>CRM Guide</small></div>
+        </div>
+        <span class="tag quote">Quote</span>
+        <h3>Sending your quote data</h3>
+        <p>Show us which GOAL leads you've quoted so we can track how the program is performing.</p>
+        <div class="spacer"></div>
+        <span class="soonpill"><span class="dot"></span>Coming soon</span>
+      </div>
+
+      <div class="card soon">
+        <div class="toprow">
+          <div class="mono">LM</div>
+          <div class="crmname">Lead Manager<small>CRM Guide</small></div>
+        </div>
+        <span class="tag bind">Bind</span>
+        <h3>Sending your bind &amp; sale data</h3>
+        <p>Report bound policies and closed sales back to GOAL straight from Lead Manager.</p>
+        <div class="spacer"></div>
+        <span class="soonpill"><span class="dot"></span>Coming soon</span>
+      </div>
+
+      <!-- ===== AgencyZoom ===== -->
+      <a class="card" href="AgencyZoom%20Lead%20Export%20-%20Client%20Guide.html">
+        <div class="toprow">
+          <div class="mono">AZ</div>
+          <div class="crmname">AgencyZoom<small>CRM Guide</small></div>
+        </div>
+        <span class="tag export">Export</span>
+        <h3>Exporting your disposition data</h3>
+        <p>Download your GOAL lead dispositions from AgencyZoom and share them with your account manager.</p>
+        <div class="spacer"></div>
+        <span class="open">Open guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <div class="card soon">
+        <div class="toprow">
+          <div class="mono">AZ</div>
+          <div class="crmname">AgencyZoom<small>CRM Guide</small></div>
+        </div>
+        <span class="tag quote">Quote</span>
+        <h3>Sending your quote data</h3>
+        <p>Mark and export the GOAL leads you've quoted in AgencyZoom in a couple of clicks.</p>
+        <div class="spacer"></div>
+        <span class="soonpill"><span class="dot"></span>Coming soon</span>
+      </div>
+
+      <div class="card soon">
+        <div class="toprow">
+          <div class="mono">AZ</div>
+          <div class="crmname">AgencyZoom<small>CRM Guide</small></div>
+        </div>
+        <span class="tag bind">Bind</span>
+        <h3>Sending your bind &amp; sale data</h3>
+        <p>Send your bound and sold GOAL leads back to us directly from AgencyZoom.</p>
+        <div class="spacer"></div>
+        <span class="soonpill"><span class="dot"></span>Coming soon</span>
+      </div>
+
+      <!-- ===== Ricochet ===== -->
+      <a class="card" href="GOAL%20%E2%80%94%20Ricochet360%20Export%20Guide%20(Client).html">
+        <div class="toprow">
+          <div class="mono">RC</div>
+          <div class="crmname">Ricochet<small>CRM Guide</small></div>
+        </div>
+        <span class="tag export">Export</span>
+        <h3>Exporting your disposition data</h3>
+        <p>Filter to your GOAL leads in Ricochet and export the full disposition list.</p>
+        <div class="spacer"></div>
+        <span class="open">Open guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <div class="card soon">
+        <div class="toprow">
+          <div class="mono">RC</div>
+          <div class="crmname">Ricochet<small>CRM Guide</small></div>
+        </div>
+        <span class="tag quote">Quote</span>
+        <h3>Sending your quote data</h3>
+        <p>Tag your quoted GOAL leads in Ricochet and get the data over to GOAL.</p>
+        <div class="spacer"></div>
+        <span class="soonpill"><span class="dot"></span>Coming soon</span>
+      </div>
+
+      <div class="card soon">
+        <div class="toprow">
+          <div class="mono">RC</div>
+          <div class="crmname">Ricochet<small>CRM Guide</small></div>
+        </div>
+        <span class="tag bind">Bind</span>
+        <h3>Sending your bind &amp; sale data</h3>
+        <p>Report your binds and sales back to GOAL from your Ricochet pipeline.</p>
+        <div class="spacer"></div>
+        <span class="soonpill"><span class="dot"></span>Coming soon</span>
+      </div>
+
+    </div>
+
+    <div class="request">
+      <div class="ricon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/>
+          <path d="M9.5 9.5a2.5 2.5 0 1 1 3.2 2.4c-.6.2-1.2.7-1.2 1.6v.3" stroke-linecap="round"/>
+          <path d="M12 17.2h.01" stroke-linecap="round"/></svg>
+      </div>
+      <div class="rtext">
+        <h3>Don't see your CRM?</h3>
+        <p>We're adding new walkthroughs all the time. Tell us which system your agency runs on and
+          <b> we'll build a guide for it</b> and let you know when it's ready.</p>
+      </div>
+      <a class="btn" href="mailto:support@checkoutgoal.com?subject=CRM%20guide%20request">
+        Request a guide
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <footer class="foot">
+      <img src="assets/goal-wordmark-black.png" alt="GOAL">
+      <div class="tag2">Exclusive leads, delivered direct to your agency.</div>
+    </footer>
+
+  </div>
+</div>
+</body>
+</html>
